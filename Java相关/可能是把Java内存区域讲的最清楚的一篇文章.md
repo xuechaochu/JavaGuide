@@ -56,18 +56,20 @@ Java 虚拟机在执行 Java 程序的过程中会把它管理的内存划分成
 
 **操作数栈  Java虚拟机的解释执行引擎被称为"基于栈的执行引擎"，其中所指的栈就是指－操作数栈。操作数栈也常被称为操作栈。
 和局部变量区一样，操作数栈也是被组织成一个以字长为单位的数组。但是和前者不同的是，它不是通过索引来访问，而是通过标准的栈操作—压栈和出栈—来访问的。比如，如果某个指令把一个值压入到操作数栈中，稍后另一个指令就可以弹出这个值来使用。 虚拟机在操作数栈中存储数据的方式和在局部变量区中是一样的：如int、long、float、double、reference和returnType的存储。对于byte、short以及char类型的值在压入到操作数栈之前，也会被转换为int。
+
          0: iconst_1 加载入栈常量（int类型）
-         1: istore_1 弹出放入到常量表中（位置0）
+         1: istore_1 弹出放入到常量表中（位置1）
          2: iconst_2 加载入栈常量（int类型）
-         3: istore_2 弹出放入到常量表中（位置1）
-         4: iload_1  加载常量表中位置0的数据到栈
-         5: iload_2  加载常量表中位置1的数据到栈
+         3: istore_2 弹出放入到常量表中（位置2）
+         4: iload_1  加载常量表中位置1的数据到栈
+         5: iload_2  加载常量表中位置2的数据到栈
          6: iadd     在操作栈中加
          7: istore_3 弹出放入常量表
          8: getstatic     #2 加载常量池（说白了就是类似拼接字符串） // Field java/lang/System.out:Ljava/io/PrintStream;
         11: iload_3  加载到栈
         12: invokevirtual #3 调用实例方法，基于类进行分派                 // Method java/io/PrintStream.println:(I)V
         15: return  返回结果
+	（局部变量表中第0位索引的Slot默认“this”关键字的引用）
   
 
 **Java 虚拟机栈会出现两种异常：StackOverFlowError 和 OutOfMemoryError。**

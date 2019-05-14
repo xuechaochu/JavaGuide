@@ -53,6 +53,21 @@ Java 虚拟机在执行 Java 程序的过程中会把它管理的内存划分成
 **Java 内存可以粗糙的区分为堆内存（Heap）和栈内存(Stack),其中栈就是现在说的虚拟机栈，或者说是虚拟机栈中局部变量表部分。** （实际上，Java虚拟机栈是由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法出口信息。）
 
 **局部变量表主要存放了编译器可知的各种数据类型**（boolean、byte、char、short、int、float、long、double）、**对象引用**（reference类型，它不同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）。
+**操作数栈  Java虚拟机的解释执行引擎被称为"基于栈的执行引擎"，其中所指的栈就是指－操作数栈。操作数栈也常被称为操作栈。
+和局部变量区一样，操作数栈也是被组织成一个以字长为单位的数组。但是和前者不同的是，它不是通过索引来访问，而是通过标准的栈操作—压栈和出栈—来访问的。比如，如果某个指令把一个值压入到操作数栈中，稍后另一个指令就可以弹出这个值来使用。 虚拟机在操作数栈中存储数据的方式和在局部变量区中是一样的：如int、long、float、double、reference和returnType的存储。对于byte、short以及char类型的值在压入到操作数栈之前，也会被转换为int。
+         0: iconst_1 加载入栈常量（int类型）
+         1: istore_1 弹出放入到常量表中（位置0）
+         2: iconst_2 加载入栈常量（int类型）
+         3: istore_2 弹出放入到常量表中（位置1）
+         4: iload_1  加载常量表中位置0的数据到栈
+         5: iload_2  加载常量表中位置1的数据到栈
+         6: iadd     在操作栈中加
+         7: istore_3 弹出放入常量表
+         8: getstatic     #2 加载常量池（说白了就是类似拼接字符串） // Field java/lang/System.out:Ljava/io/PrintStream;
+        11: iload_3  加载到栈
+        12: invokevirtual #3 调用实例方法，基于类进行分派                 // Method java/io/PrintStream.println:(I)V
+        15: return  返回结果
+  
 
 **Java 虚拟机栈会出现两种异常：StackOverFlowError 和 OutOfMemoryError。**
 
